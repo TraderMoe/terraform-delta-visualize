@@ -1,0 +1,47 @@
+<template>
+  <v-navigation-drawer expand-on-hover rail width="350" permanent>
+
+    <v-list>
+      <v-list-item
+        title="Terraform Delta Visualizer"
+        prepend-icon="mdi mdi-vector-difference"
+        subtitle="Visualize your Terraform plan"
+      />
+    </v-list>
+
+    <v-divider class="pb-10" />
+
+    <v-list-item
+      :to="navigationItem.path"
+      link
+      v-for="navigationItem in getItems()"
+      :title="getTitle(navigationItem)"
+      :key="getTitle(navigationItem)"
+      :prepend-icon="getIcon(navigationItem)"
+    ></v-list-item>
+
+    <template v-slot:append>
+      <v-divider class="mt-10 mb-5" />
+      <v-list-item class="mb-5" prepend-icon="mdi mdi mdi-github" title="GitHub" link target="_blank" href="https://github.com/TraderMoe/terraform-delta-visualize">
+      </v-list-item>
+    </template>
+
+  </v-navigation-drawer>
+</template>
+
+<script lang="ts" setup>
+import router from "@/router";
+
+//methods
+const getItems = () => {
+  return router.options.routes.filter(
+    (route: any) => route.hideInDrawer !== true && route.children !== undefined
+  );
+};
+const getTitle = (navigationItem: any) => {
+  return navigationItem.children[0].name ?? "";
+};
+const getIcon = (navigationItem: any) => {
+  return navigationItem.children[0].icon ?? "";
+};
+</script>
