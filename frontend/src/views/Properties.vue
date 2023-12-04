@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-responsive class="fill-height">
-    <v-heading class="text-h2 py-4">Properties</v-heading>  
+    <div class="text-h2 py-2">Properties</div>  
     </v-responsive>
   </v-container>
 </template>

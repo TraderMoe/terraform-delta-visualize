@@ -9,5 +9,6 @@ import { useAppStore } from "./store/app";
 if (import.meta.env.MODE === "development") {
   let appStore = useAppStore();
   appStore.setRootPlan(SamplePlan);
+  appStore.setSelectedChange(SamplePlan.resource_changes[0]);
 }
 </script>

@@ -10,6 +10,11 @@
       <div class="py-14" />
 
       <v-row class="d-flex align-center justify-center">
+        <v-col cols="3">
+          <UploadPlan />
+        </v-col>
+      </v-row>
+      <v-row class="d-flex align-center justify-center">
         <v-col cols="auto">
           <v-btn
             href="https://github.com/TraderMoe/terraform-delta-visualize"
@@ -26,5 +31,5 @@
 </template>
 
 <script lang="ts" setup>
-//
+import UploadPlan from "./UploadPlan.vue";
 </script>

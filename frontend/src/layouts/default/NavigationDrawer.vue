@@ -21,8 +21,11 @@
     ></v-list-item>
 
     <template v-slot:append>
-      <v-divider class="mt-10 mb-5" />
-      <v-list-item class="mb-5" prepend-icon="mdi mdi mdi-github" title="GitHub" link target="_blank" href="https://github.com/TraderMoe/terraform-delta-visualize">
+      <v-list-item>
+          <v-list-item-title class="title"><UploadPlan class="mt-3"/></v-list-item-title>
+      </v-list-item>
+      <v-divider/>
+      <v-list-item class="mb-5 mt-5" prepend-icon="mdi mdi mdi-github" title="GitHub" link target="_blank" href="https://github.com/TraderMoe/terraform-delta-visualize">
       </v-list-item>
     </template>
 
@@ -30,6 +33,7 @@
 </template>
 
 <script lang="ts" setup>
+import UploadPlan from "@/components/UploadPlan.vue";
 import router from "@/router";
 
 //methods

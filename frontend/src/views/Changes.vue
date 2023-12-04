@@ -3,26 +3,15 @@
     <v-row justify="center">
       <v-col cols="3">
         <v-row>
+          <v-col cols="12"><div class="text-h2 py-2">Change</div> </v-col>
           <v-col cols="12"
-            ><v-heading class="text-h2 py-4">Change</v-heading>
+            ><div class="py-2 text-medium-emphasis">
+              <v-icon>mdi mdi-calendar-clock</v-icon> Created:
+              {{ formattedTimeStamp }}
+            </div>
           </v-col>
           <v-col cols="12">
-            <v-card
-              v-for="change in relevantChanges"
-              :key="change.address"
-              @click="changeSelection(change)"
-              class="mx-auto ma-2"
-              :variant="getVariant(change)"
-            >
-              <template v-slot:title>
-                {{ change.name }}
-              </template>
-              <template v-slot:subtitle>
-                {{ change.address }}
-              </template>
-
-              <template v-slot:text> {{ change.type }} </template>
-            </v-card>
+            <ChangeCard :relevant-changes="relevantChanges" />
           </v-col>
         </v-row>
       </v-col>
@@ -34,7 +23,9 @@
 </template>
 
 <script lang="ts">
-import ResourceDiff from "@/components/RessourceDiff.vue";
+import ResourceDiff from "../components/RessourceDiff.vue";
+import ChangeCard from "../components/ChangeCards.vue";
+import { useDate } from "vuetify";
 import { useAppStore } from "../store/app";
 import { RootPlan } from "../types/RootPlan";
 import { ResourceChange } from "../types/ResourceChange";
@@ -43,13 +34,18 @@ import { defineComponent } from "vue";
 export default defineComponent({
   components: {
     ResourceDiff,
+    ChangeCard,
   },
   setup() {
     const store = useAppStore();
+    const date = useDate();
     const rootPlan: RootPlan = store.rootPlan;
-
+    const selectedChange: ResourceChange = store.selectedChange;
     return {
       rootPlan,
+      date,
+      store,
+      selectedChange,
     };
   },
   computed: {
@@ -58,21 +54,13 @@ export default defineComponent({
         (change) => change.change.actions[0] !== "no-op"
       );
     },
-  },
-  data() {
-    return {
-      selectedChange: this.rootPlan.resource_changes[0],
-    };
-  },
-  methods: {
-    changeSelection(change: ResourceChange) {
-      this.selectedChange = change;
-    },
-    getVariant(change: ResourceChange) {
-      if (change === this.selectedChange) {
-        return "outlined";
-      }
-      return "tonal";
+    formattedTimeStamp() {
+      let timeStampDate = new Date(this.rootPlan.timestamp);
+      return (
+        this.date.format(timeStampDate, "keyboardDate") +
+        " " +
+        timeStampDate.toLocaleTimeString()
+      );
     },
   },
 });
