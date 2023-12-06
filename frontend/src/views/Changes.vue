@@ -22,46 +22,29 @@
   </v-container>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import ResourceDiff from "../components/RessourceDiff.vue";
 import ChangeCard from "../components/ChangeCards.vue";
 import { useDate } from "vuetify";
 import { useAppStore } from "../store/app";
-import { RootPlan } from "../types/RootPlan";
-import { ResourceChange } from "../types/ResourceChange";
-import { defineComponent } from "vue";
+import { computed } from "vue";
+import { storeToRefs } from "pinia";
 
-export default defineComponent({
-  components: {
-    ResourceDiff,
-    ChangeCard,
-  },
-  setup() {
-    const store = useAppStore();
-    const date = useDate();
-    const rootPlan: RootPlan = store.rootPlan;
-    const selectedChange: ResourceChange = store.selectedChange;
-    return {
-      rootPlan,
-      date,
-      store,
-      selectedChange,
-    };
-  },
-  computed: {
-    relevantChanges() {
-      return this.rootPlan.resource_changes.filter(
-        (change) => change.change.actions[0] !== "no-op"
-      );
-    },
-    formattedTimeStamp() {
-      let timeStampDate = new Date(this.rootPlan.timestamp);
-      return (
-        this.date.format(timeStampDate, "keyboardDate") +
-        " " +
-        timeStampDate.toLocaleTimeString()
-      );
-    },
-  },
+const store = useAppStore();
+const date = useDate();
+const { rootPlan, selectedChange } = storeToRefs(store);
+
+const relevantChanges = computed(() => {
+  return rootPlan.value.resource_changes.filter(
+    (change) => change.change.actions[0] !== "no-op"
+  );
+});
+const formattedTimeStamp = computed(() => {
+  let timeStampDate = new Date(rootPlan.value.timestamp);
+  return (
+    date.format(timeStampDate, "keyboardDate") +
+    " " +
+    timeStampDate.toLocaleTimeString()
+  );
 });
 </script>

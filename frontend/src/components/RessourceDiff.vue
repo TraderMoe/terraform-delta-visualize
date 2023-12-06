@@ -36,38 +36,30 @@
   </v-row>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useAppStore } from "@/store/app";
-import { defineComponent } from "vue";
+import { computed, ref } from "vue";
 import { storeToRefs } from "pinia";
 
-export default defineComponent({
-  setup() {
-    const store = useAppStore();
-    const { selectedChange } = storeToRefs(store);
-    return { change: selectedChange.value.change };
-  },
-  //TODO STILL HANDLE REACTIVITY HERE :(
-  data: () => ({
-    hideUnchangedLines: false,
-    sideBySideDiff: true,
-  }),
-  computed: {
-    before() {
-      return JSON.stringify(this.selectedChange.before, null, 2);
-    },
-    after() {
-      return JSON.stringify(this.selectedChange.after, null, 2);
-    },
-    mode() {
-      return this.sideBySideDiff ? "split" : "unified";
-    },
-    actionString() {
-      return this.selectedChange.actions.join(", ");
-    },
-    selectedChange() {
-      return this.change;
-    },
-  },
+const store = useAppStore();
+const { selectedChange } = storeToRefs(store);
+
+const change = computed(() => {
+  return selectedChange.value.change;
+});
+
+const hideUnchangedLines = ref(false);
+const sideBySideDiff = ref(true);
+const before = computed(() => {
+  return JSON.stringify(change.value.before, null, 2);
+});
+const after = computed(() => {
+  return JSON.stringify(change.value.after, null, 2);
+});
+const mode = computed(() => {
+  return sideBySideDiff.value ? "split" : "unified";
+});
+const actionString = computed(() => {
+  return change.value.actions.join(", ");
 });
 </script>
