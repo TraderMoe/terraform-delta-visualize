@@ -11,6 +11,7 @@ export const useAppStore = defineStore("app", {
   actions: {
     setRootPlan(root: RootPlan) {
       this.rootPlan = root;
+      this.selectedChange = root.resource_changes[0];
     },
     setSelectedChange(change: ResourceChange) {
       this.selectedChange = change;

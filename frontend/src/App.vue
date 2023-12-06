@@ -8,5 +8,4 @@ import { useAppStore } from "./store/app";
 
 let appStore = useAppStore();
 appStore.setRootPlan(SamplePlan);
-appStore.setSelectedChange(SamplePlan.resource_changes[0]);
 </script>
