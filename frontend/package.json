@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "build-github-pages": "vue-tsc --noEmit && vite build --outDir ../docs --emptyOutDir --base=terraform-delta-visualize/",
     "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d ../docs",
     "lint": "eslint . --fix --ignore-path .gitignore"
   },
   "dependencies": {
@@ -26,6 +27,7 @@
     "@vue/eslint-config-typescript": "^11.0.0",
     "eslint": "^8.37.0",
     "eslint-plugin-vue": "^9.3.0",
+    "gh-pages": "^6.1.0",
     "highlight.js": "^11.9.0",
     "sass": "^1.60.0",
     "typescript": "^5.0.0",
