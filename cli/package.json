@@ -1,5 +1,5 @@
 {
-  "name": "tfdeltaviz",
+  "name": "terraform-delta-visualizer",
   "version": "1.0.0",
   "description": "yet another terraform plan visualizer",
   "main": "index.js",
