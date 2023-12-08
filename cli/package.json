@@ -1,0 +1,26 @@
+{
+  "name": "terraform-delta-visualizer",
+  "version": "1.0.0",
+  "description": "yet another terraform plan visualizer",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TraderMoe/terraform-delta-visualize.git"
+  },
+  "keywords": [
+    "terraform",
+    "visualization"
+  ],
+  "author": "TraderMoe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TraderMoe/terraform-delta-visualize/issues"
+  },
+  "homepage": "https://github.com/TraderMoe/terraform-delta-visualize#readme",
+  "dependencies": {
+    "commander": "^11.1.0"
+  }
+}
