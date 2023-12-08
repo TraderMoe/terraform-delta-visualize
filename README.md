@@ -13,6 +13,7 @@ Unimplemented feature ideas:
 - [ ] display of resource dependencies
 - [ ] summary of actions (counts)
 - [ ] filter options for change resources
+- [ ] list of resource changes will be scrollable diff stays fixed
 
 
 ## Usage
