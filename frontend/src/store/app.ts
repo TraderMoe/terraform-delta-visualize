@@ -7,6 +7,7 @@ export const useAppStore = defineStore("app", {
   state: () => ({
     rootPlan: {} as RootPlan,
     selectedChange: {} as ResourceChange,
+    offlineMode: false,
   }),
   actions: {
     setRootPlan(root: RootPlan) {
@@ -15,6 +16,9 @@ export const useAppStore = defineStore("app", {
     },
     setSelectedChange(change: ResourceChange) {
       this.selectedChange = change;
+    },
+    setOfflineMode(offline: boolean) {
+      this.offlineMode = offline;
     },
   },
 });

@@ -13,5 +13,8 @@ Unimplemented feature ideas:
 - show all properties of plan
 
 ## Usage
-Upload your Terraform plan to visualize it.
+Upload your Terraform plan to visualize the changes.
 
+[Try it!](https://tradermoe.github.io/terraform-delta-visualize/)
+
+![screenshot](./docs/screenshot.png)

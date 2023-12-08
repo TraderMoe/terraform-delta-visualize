@@ -17,9 +17,15 @@
       </v-row>
     </v-col>
     <v-col cols="12">
-      <v-row justify="center">
+      <v-row justify="center" align="center">
         <v-col cols="auto">
-          <div class="text-h4">{{ actionString }}</div>
+          <div class="text-h4">
+            <v-icon
+              :color="getColor(change.actions)"
+              :icon="getIcon(change.actions)"
+              :title="change.actions"
+            /> {{ actionString }}
+          </div>
         </v-col>
         <v-col cols="12">
           <Diff
@@ -62,4 +68,61 @@ const mode = computed(() => {
 const actionString = computed(() => {
   return change.value.actions.join(", ");
 });
+
+function getColor(actions: string[]) {
+  if (isDangerousChange(actions)) {
+    return "error";
+  }
+  if (isFriendlyChange(actions)) {
+    return "success";
+  }
+  return "warning";
+}
+
+function isFriendlyChange(actions: string[]) {
+  return isCreate(actions) || isRead(actions);
+}
+
+function isDangerousChange(actions: string[]) {
+  return isDelete(actions) || isDeleteCreate(actions);
+}
+
+function getIcon(actions: string[]) {
+  if (isDeleteCreate(actions)) {
+    return "mdi mdi-swap-horizontal";
+  }
+  if (isDelete(actions)) {
+    return "mdi mdi-delete";
+  }
+  if (isCreate(actions)) {
+    return "mdi mdi-plus";
+  }
+  if (isUpdate(actions)) {
+    return "mdi mdi-pencil";
+  }
+  if (isRead(actions)) {
+    return "mdi mdi-file-search-outline";
+  }
+  return "mdi mdi-alert";
+}
+
+function isRead(actions: string[]) {
+  return actions.includes("read");
+}
+
+function isUpdate(actions: string[]) {
+  return actions.includes("update");
+}
+
+function isCreate(actions: string[]) {
+  return actions.includes("create");
+}
+
+function isDelete(actions: string[]) {
+  return actions.includes("delete");
+}
+
+function isDeleteCreate(actions: string[]) {
+  return actions.includes("delete") && actions.includes("create");
+}
 </script>

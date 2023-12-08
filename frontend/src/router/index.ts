@@ -31,7 +31,6 @@ const routes = [
   },
   {
     path: "/properties",
-    hideInDrawer: true,
     component: () => import("@/layouts/default/Default.vue"),
     children: [
       {

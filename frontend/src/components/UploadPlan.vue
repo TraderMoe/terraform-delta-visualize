@@ -7,19 +7,22 @@
     accept=".json"
     @change="onFileChange"
     :loading="uploading"
+    v-if="!offlineMode"
   ></v-file-input>
 </template>
 
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
 import { useAppStore } from "../store/app";
-import { RootPlan } from "../types/RootPlan";
+import { RootPlan, emptyRootPlan } from "../types/RootPlan";
 import { ref } from "vue";
+import { storeToRefs } from "pinia";
 
 const store = useAppStore();
 const router = useRouter();
 
 const uploading = ref(false);
+const { offlineMode } = storeToRefs(store);
 
 function onFileChange(e: any) {
   uploading.value = true;
@@ -31,12 +34,7 @@ function onFileChange(e: any) {
 function storePlan(file: Blob) {
   let reader = new FileReader();
   reader.onload = (e: ProgressEvent<FileReader>) => {
-    let json: RootPlan = {
-      format_version: "",
-      terraform_version: "",
-      resource_changes: [],
-      timestamp: "",
-    };
+    let json: RootPlan = emptyRootPlan;
     
     if (e.target && typeof e.target.result === "string") {
       json = JSON.parse(e.target.result) as RootPlan;

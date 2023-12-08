@@ -23,8 +23,8 @@
 </template>
 
 <script lang="ts" setup>
-import ResourceDiff from "../components/RessourceDiff.vue";
-import ChangeCard from "../components/ChangeCards.vue";
+import ResourceDiff from "../components/changes/RessourceDiff.vue";
+import ChangeCard from "../components/changes/ChangeCards.vue";
 import { useDate } from "vuetify";
 import { useAppStore } from "../store/app";
 import { computed } from "vue";
