@@ -2,6 +2,7 @@
 import vue from "@vitejs/plugin-vue";
 import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 import ViteFonts from "unplugin-fonts/vite";
+import { resolve } from "path";
 
 // Utilities
 import { defineConfig } from "vite";
@@ -34,7 +35,6 @@ export default defineConfig({
       },
     }),
   ],
-  define: { "process.env": {} },
   base: "/terraform-delta-visualize/",
   resolve: {
     alias: {
@@ -49,17 +49,17 @@ export default defineConfig({
     rollupOptions: {
       output: {
         sanitizeFileName(fileName) {
-          	const match = DRIVE_LETTER_REGEX.exec(fileName);
-            const driveLetter = match ? match[0] : "";
+          const match = DRIVE_LETTER_REGEX.exec(fileName);
+          const driveLetter = match ? match[0] : "";
 
-            // A `:` is only allowed as part of a windows drive letter (ex: C:\foo)
-            // Otherwise, avoid them because they can refer to NTFS alternate data streams.
-            return (
-              driveLetter +
-              fileName
-                .substring(driveLetter.length)
-                .replace(INVALID_CHAR_REGEX, "")
-            );
+          // A `:` is only allowed as part of a windows drive letter (ex: C:\foo)
+          // Otherwise, avoid them because they can refer to NTFS alternate data streams.
+          return (
+            driveLetter +
+            fileName
+              .substring(driveLetter.length)
+              .replace(INVALID_CHAR_REGEX, "")
+          );
         },
       },
     },

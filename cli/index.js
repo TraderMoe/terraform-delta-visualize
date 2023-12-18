@@ -1,13 +1,27 @@
-#!/usr/bin/env node
+const fs = require('fs');
+const path = require('path');
+const { spawn } = require('child_process');
 
-const program = require('commander');
+const jsonFilePath = process.argv[2];
 
-program
-  .version('0.0.1')
-  .description('An example CLI tool in Node.js')
-  .option('-n, --name <type>', 'Your name')
-  .option('-a, --age <type>', 'Your age')
-  .parse(process.argv);
+if (!jsonFilePath) {
+  console.error('Usage: cli.js <path-to-json-file>');
+  process.exit(1);
+}
 
-if (program.name) console.log(`Hello, ${program.name}!`);
-if (program.age) console.log(`You are ${program.age} years old.`);
+const jsonData = JSON.parse(fs.readFileSync(jsonFilePath, 'utf-8'));
+
+const childProcess = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['run',  'dev' , jsonData], {
+  env: {
+    ...process.env,
+  },
+  cwd: path.resolve(__dirname, '../frontend'),
+  stdio: 'inherit',
+});
+
+console.log('test');
+
+// Handle Exit
+childProcess.on('exit', (code) => {
+  process.exit(code);
+});
