@@ -18,7 +18,7 @@ const rootPlan = JSON.parse(fs.readFileSync(jsonFilePath, 'utf-8'));
 
 console.log('Executing path:', executingPath);
 
-const npmRunBuild = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['run', 'build', '-- --base=' + executingPath], {
+const npmRunBuild = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['run', 'build', '-- --base=./'], {
   env: {
     ...process.env,
     ROOT_PLAN: JSON.stringify(rootPlan),
