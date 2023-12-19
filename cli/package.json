@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/TraderMoe/terraform-delta-visualize/issues"
   },
-  "homepage": "https://github.com/TraderMoe/terraform-delta-visualize#readme"
+  "homepage": "https://github.com/TraderMoe/terraform-delta-visualize#readme",
+  "dependencies": {
+    "fs-extra": "^11.2.0"
+  }
 }

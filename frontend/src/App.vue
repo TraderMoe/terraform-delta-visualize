@@ -8,12 +8,9 @@ import { useAppStore } from "./store/app";
 
 let appStore = useAppStore();
 
-console.log(import.meta.env);
-
-if (import.meta.env.JSON_DATA != null) {
-  console.log("Using JSON data from environment variable");
-  appStore.setRootPlan(JSON.parse(JSON.stringify(import.meta.env.JSON_DATA)));
-} else {
+if (import.meta.env.VITE_ROOT_PLAN === "" || import.meta.env.VITE_ROOT_PLAN === undefined) {
   appStore.setRootPlan(SamplePlan);
+} else {
+  appStore.setRootPlan(JSON.parse(JSON.stringify(import.meta.env.VITE_ROOT_PLAN)));
 }
 </script>

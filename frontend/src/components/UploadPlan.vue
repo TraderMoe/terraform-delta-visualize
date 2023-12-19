@@ -7,22 +7,19 @@
     accept=".json"
     @change="onFileChange"
     :loading="uploading"
-    v-if="!offlineMode"
   ></v-file-input>
 </template>
 
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
-import { useAppStore } from "../store/app";
-import { RootPlan, emptyRootPlan } from "../types/RootPlan";
+import { useAppStore } from "@/store/app";
+import { RootPlan, emptyRootPlan } from "@/types/RootPlan";
 import { ref } from "vue";
-import { storeToRefs } from "pinia";
 
 const store = useAppStore();
 const router = useRouter();
 
 const uploading = ref(false);
-const { offlineMode } = storeToRefs(store);
 
 function onFileChange(e: any) {
   uploading.value = true;

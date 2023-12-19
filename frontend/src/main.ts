@@ -13,8 +13,6 @@ import App from "./App.vue";
 // Composables
 import { createApp } from "vue";
 
-if (process.argv[2] != null) process.env.JSON_DATA = process.argv[2];
-
 const app = createApp(App);
 
 registerPlugins(app);
