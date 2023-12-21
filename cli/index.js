@@ -18,11 +18,11 @@ const rootPlan = JSON.parse(fs.readFileSync(jsonFilePath, 'utf-8'));
 
 console.log('Executing path:', executingPath);
 
-const npmRunBuild = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['run', 'build', '-- --base=./'], {
+const npmRunBuild = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['run', 'build:local'], {
   env: {
     ...process.env,
-    ROOT_PLAN: JSON.stringify(rootPlan),
-    LOCAL_HOSTING: true,
+    VITE_ROOT_PLAN: JSON.stringify(rootPlan),
+    VITE_LOCAL_HOSTING: true,
   },
   cwd: path.resolve(__dirname, '../frontend'),
   stdio: 'inherit',

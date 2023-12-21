@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
+    "build:local": "vue-tsc --noEmit && vite build --base ./ && vite preview",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d ./dist",

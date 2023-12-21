@@ -5,12 +5,21 @@
 <script lang="ts" setup>
 import { SamplePlan } from "./sample/samplePlan";
 import { useAppStore } from "./store/app";
+import { RootPlan } from "./types/RootPlan";
 
 let appStore = useAppStore();
 
-if (import.meta.env.VITE_ROOT_PLAN === "" || import.meta.env.VITE_ROOT_PLAN === undefined) {
+console.log("VITE_ROOT_PLAN", import.meta.env.VITE_ROOT_PLAN);
+
+if (
+  import.meta.env.VITE_ROOT_PLAN === "" ||
+  import.meta.env.VITE_ROOT_PLAN === undefined
+) {
   appStore.setRootPlan(SamplePlan);
 } else {
-  appStore.setRootPlan(JSON.parse(JSON.stringify(import.meta.env.VITE_ROOT_PLAN)));
+  const rootPlan: RootPlan = JSON.parse(
+    import.meta.env.VITE_ROOT_PLAN
+  );
+  appStore.setRootPlan(rootPlan);
 }
 </script>

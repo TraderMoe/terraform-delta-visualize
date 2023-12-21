@@ -1,7 +1,7 @@
 <template>
   <v-container class="mb-6">
     <v-row justify="center">
-      <v-col cols="3">
+      <v-col :sm="12" :md="3">
         <v-row>
           <v-col cols="12"><div class="text-h2 py-2">Properties</div> </v-col>
           <v-col cols="12"
@@ -15,7 +15,7 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="9">
+      <v-col :sm="12" :md="9">
         <VariableCards />
       </v-col>
     </v-row>
