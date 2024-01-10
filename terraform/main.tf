@@ -47,7 +47,7 @@ resource "azurerm_subnet" "app_service_subnet" {
 }
 
 resource "azurerm_subnet" "app_gateway_subnet" {
-  name                 = "subnet-terraform-delta-visualize-app-gateway"
+  name                 = "subnet-terraform-delta-visualize-appgateway"
   resource_group_name  = azurerm_resource_group.resource_group.name
   virtual_network_name = azurerm_virtual_network.virtual_network_tdv.name
   address_prefixes     = ["172.16.32.0/24"]
