@@ -31,5 +31,5 @@
 </template>
 
 <script lang="ts" setup>
-import UploadPlan from "./UploadPlan.vue";
+import UploadPlan from "@/components/UploadPlan.vue";
 </script>
